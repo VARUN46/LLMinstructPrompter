@@ -19,6 +19,22 @@ namespace LLMinstructPrompter.Prompts
         private Dictionary<int, PromptTask> promptTasks = new Dictionary<int, PromptTask>();
         private bool discardSysPrompt;
         private string sysPrompt;
+        private Dictionary<string, string> templateTextPairsData = new Dictionary<string, string>();
+
+        private string GetSystemPrompt(PromptTemplates promptTemplate)
+        {
+            string mainPrompt;
+
+            if (string.IsNullOrWhiteSpace(sysPrompt))
+            {
+                mainPrompt = promptTemplate.SystemPromptTemplate;
+            }
+            else
+            {
+                mainPrompt = sysPrompt;
+            }
+            return mainPrompt;
+        }
 
         public PromptableObject GetPrompt()
         {
@@ -28,14 +44,7 @@ namespace LLMinstructPrompter.Prompts
             string mainPrompt = string.Empty;
             if (!discardSysPrompt)
             {
-                if (string.IsNullOrWhiteSpace(sysPrompt))
-                {
-                    mainPrompt = promptTemplate.SystemPromptTemplate;
-                }
-                else
-                {
-                    mainPrompt = sysPrompt;
-                }
+                mainPrompt = GetSystemPrompt(promptTemplate);
             }
             if (promptTasks.Count == 1)
             {
@@ -49,12 +58,19 @@ namespace LLMinstructPrompter.Prompts
                     taskSteps.AppendLine(promptTemplate.PromptBuilderTaskTemplate.Replace("{step_no}", task.Key.ToString()).Replace("{given_task}", task.Value.Task));
                 }
                 taskSteps.AppendLine("Note: Only generate the output for final task. Do not generate any additional information.");
-                mainPrompt = promptTemplate.PromptBuilderNTaskTemplateGeneric.Replace("{tasks}", taskSteps.ToString()).Replace("{given_format}", givenFormat);
+                mainPrompt += promptTemplate.PromptBuilderNTaskTemplateGeneric.Replace("{tasks}", taskSteps.ToString()).Replace("{given_format}", givenFormat);
             }
+
+            foreach (var templateText in templateTextPairsData)
+            {
+                mainPrompt = mainPrompt.Replace(templateText.Key, templateText.Value);
+            }
+
             var promptableObject = new PromptableObject
             {
                 UserPrompt = mainPrompt,
                 OutputRandomnessType = randomness,
+                SystemPrompt = GetSystemPrompt(promptTemplate)
             };
             return promptableObject;
         }
@@ -133,6 +149,15 @@ namespace LLMinstructPrompter.Prompts
         public IPromptDesigns DiscardSystemPrompt()
         {
             this.discardSysPrompt = true;
+            return this;
+        }
+
+        public IPromptDesigns ReplaceTemplateWithText(params TemplateTextPair[] templateTextPairs)
+        {
+            foreach (var templateTextPair in templateTextPairs)
+            {
+                templateTextPairsData.Add(templateTextPair.TemplateVariableName, templateTextPair.Value);
+            }
             return this;
         }
     }

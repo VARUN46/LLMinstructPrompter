@@ -61,5 +61,7 @@ namespace LLMinstructPrompter.Abstract.Prompts
         /// <returns></returns>
         IPromptDesigns DiscardSystemPrompt();
 
+        IPromptDesigns ReplaceTemplateWithText(params TemplateTextPair[] templateTextPairs);
+
     }
 }

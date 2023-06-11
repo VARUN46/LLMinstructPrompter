@@ -1,6 +1,6 @@
 {
-  "SystemPromptTemplate": "You are an AI assistant that helps people find useful information.",
-  "PromptBuilder1TaskTemplateGeneric": "If you are unsure do not generate the output, do not make any assumptions and generate random output.\n{task}\n####\n{given_format}",
+  "SystemPromptTemplate": "You are an AI assistant that helps people find useful information.If you are unsure do not generate the output, do not make any assumptions and generate random output.",
+  "PromptBuilder1TaskTemplateGeneric": "{task}\n####\n{given_format}",
   "PromptBuilderNTaskTemplateGeneric": "Perform each of the given tasks step by step. Take output of a step and input it to the next step. If you are unsure stop generating the output, do not make any assumptions and generate random output. Perform the below tasks:\n{tasks}.\n####\n{given_format}",
   "PromptBuilderTaskTemplate": "{step_no}. {given_task}"
 }
