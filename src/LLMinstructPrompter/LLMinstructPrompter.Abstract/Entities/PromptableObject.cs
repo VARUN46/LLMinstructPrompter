@@ -7,6 +7,6 @@ namespace LLMinstructPrompter.Abstract.Entities
     public class PromptableObject
     {
         public string UserPrompt { get; set; }
-        public OutputRandomness OutputRandomness { get; set; }
+        public OutputRandomness OutputRandomnessType { get; set; }
     }
 }

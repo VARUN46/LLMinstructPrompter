@@ -17,4 +17,9 @@
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LLMinstructPrompter.Abstract\LLMinstructPrompter.Abstract.csproj" />
+    <ProjectReference Include="..\LLMinstructPrompter\LLMinstructPrompter.csproj" />
+  </ItemGroup>
+
 </Project>
