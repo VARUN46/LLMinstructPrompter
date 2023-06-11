@@ -61,6 +61,11 @@ namespace LLMinstructPrompter.Abstract.Prompts
         /// <returns></returns>
         IPromptDesigns DiscardSystemPrompt();
 
+        /// <summary>
+        /// Replace prompt with text
+        /// </summary>
+        /// <param name="templateTextPairs"></param>
+        /// <returns></returns>
         IPromptDesigns ReplaceTemplateWithText(params TemplateTextPair[] templateTextPairs);
 
     }
