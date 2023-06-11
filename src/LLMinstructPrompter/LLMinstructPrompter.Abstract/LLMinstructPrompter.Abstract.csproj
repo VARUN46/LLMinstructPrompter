@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<PackageId>LLMinstructPrompter.Abstract</PackageId>
-		<Version>0.0.0.1-alpha</Version>
+		<Version>1.0.0.0</Version>
 		<Authors>Varun Setia</Authors>
 		<Company>Varun Setia</Company>
 		<PackageTags>Open AI, Prompt engineering, LLM, Large language models, NLP, Prompts</PackageTags>
