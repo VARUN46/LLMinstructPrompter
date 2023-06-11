@@ -1,8 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>LLMinstructPrompter</PackageId>
+		<Version>0.0.0.1-alpha</Version>
+		<Authors>Varun Setia</Authors>
+		<Company>Varun Setia</Company>
+		<PackageTags>Open AI, Prompt engineering, LLM, Large language models, NLP, Prompts</PackageTags>
+		<Description>
+			I will give you ability to purely focus on business use cases without needing to worry about prompt engineering.
+			Download this package today designed to build best prompts in the world only for .NET.
+			Github Repo - https://github.com/VARUN46/LLMinstructPrompter
+			Release available at - https://github.com/VARUN46/LLMinstructPrompter
+		</Description>
+		<PackageReadmeFile>./README.md</PackageReadmeFile>
+	</PropertyGroup>
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,5 +36,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+	<ItemGroup>
+		<None Include="docs\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>
