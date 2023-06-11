@@ -17,6 +17,8 @@ namespace LLMinstructPrompter.Prompts
         private OutputRandomness randomness;
         private bool isList;
         private Dictionary<int, PromptTask> promptTasks = new Dictionary<int, PromptTask>();
+        private bool discardSysPrompt;
+        private string sysPrompt;
 
         public PromptableObject GetPrompt()
         {
@@ -24,6 +26,17 @@ namespace LLMinstructPrompter.Prompts
 
             var givenFormat = GetOutputPromptPart(outputType);
             string mainPrompt = string.Empty;
+            if (!discardSysPrompt)
+            {
+                if (string.IsNullOrWhiteSpace(sysPrompt))
+                {
+                    mainPrompt = promptTemplate.SystemPromptTemplate;
+                }
+                else
+                {
+                    mainPrompt = sysPrompt;
+                }
+            }
             if (promptTasks.Count == 1)
             {
                 mainPrompt = promptTemplate.PromptBuilder1TaskTemplateGeneric.Replace("{task}", promptTasks.First().Value.Task).Replace("{given_format}", givenFormat);
@@ -49,13 +62,14 @@ namespace LLMinstructPrompter.Prompts
         private string GetOutputPromptPart(OutputType outputType)
         {
             var givenFormat = string.Empty;
-            if (outputType ==OutputType.CSV)
+            if (outputType == OutputType.CSV)
             {
-                givenFormat = $"Generate the output in format:\nType should be {outputType}\nKeys: {string.Join(",",allKeys)}";
-            }else if(outputType == OutputType.JSON)
+                givenFormat = $"Generate the output in format:\nType should be {outputType}\nKeys: {string.Join(",", allKeys)}";
+            }
+            else if (outputType == OutputType.JSON)
             {
                 string listPart = isList ? " list" : "";
-                string objectFormat = "{ "+string.Join(",",allKeys.Select(c => $"\"{c}\":\"<{c.ToLower()}>\""))+" }";
+                string objectFormat = "{ " + string.Join(",", allKeys.Select(c => $"\"{c}\":\"<{c.ToLower()}>\"")) + " }";
                 givenFormat = $"Generate the output in format:\nType should be {outputType} {listPart}, object as {objectFormat}";
 
             }
@@ -95,10 +109,10 @@ namespace LLMinstructPrompter.Prompts
 
         public IPromptDesigns OutputObject<T>()
         {
-            isList = typeof(T).GetInterfaces().Any(c=>c.Name == "IEnumerable");
-            if(isList)
+            isList = typeof(T).GetInterfaces().Any(c => c.Name == "IEnumerable");
+            if (isList)
             {
-                var keys = typeof(T).GetProperties().First(c=>c.Name == "Item").PropertyType.GetProperties();
+                var keys = typeof(T).GetProperties().First(c => c.Name == "Item").PropertyType.GetProperties();
                 allKeys = keys.Select(c => c.Name).ToList();
 
             }
@@ -107,6 +121,18 @@ namespace LLMinstructPrompter.Prompts
                 var keys = typeof(T).GetProperties();
                 allKeys = keys.Select(c => c.Name).ToList();
             }
+            return this;
+        }
+
+        public IPromptDesigns SetSystemPrompt(string prompt)
+        {
+            this.sysPrompt = prompt;
+            return this;
+        }
+
+        public IPromptDesigns DiscardSystemPrompt()
+        {
+            this.discardSysPrompt = true;
             return this;
         }
     }

@@ -47,6 +47,19 @@ namespace LLMinstructPrompter.Abstract.Prompts
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         IPromptDesigns OutputObject<T>();
+        
+        /// <summary>
+        ///Sets the system prompt to for context setting 
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns></returns>
+        IPromptDesigns SetSystemPrompt(string prompt);
+
+        /// <summary>
+        /// This will discard system prompt and will not generate
+        /// </summary>
+        /// <returns></returns>
+        IPromptDesigns DiscardSystemPrompt();
 
     }
 }
