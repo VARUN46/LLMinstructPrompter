@@ -6,6 +6,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Net;
 
 namespace Setia.iLLM.Encoder
 {
@@ -16,8 +17,9 @@ namespace Setia.iLLM.Encoder
         private static readonly Dictionary<string, int> encoderCorpus;
         private static readonly Dictionary<string, int> bpeCorpus;
 
-        private readonly Dictionary<int,char> encodeByte = new Dictionary<int,char>();
+        private readonly Dictionary<int, char> encodeByte = new Dictionary<int, char>();
         private readonly Dictionary<char, int> decodeByte = new Dictionary<char, int>();
+        private readonly Dictionary<string,int> bpeRank = new Dictionary<string, int>();
 
         static GptEncoder()
         {
@@ -33,12 +35,28 @@ namespace Setia.iLLM.Encoder
             }
         }
 
-        public static Dictionary<string,int> ReadEncoderFile(string filepath)
+        public static Dictionary<string, int> ReadEncoderFile(string filepath)
         {
             var dataRaw = File.ReadAllText(filepath);
-            var dictionary = JsonConvert.DeserializeObject<Dictionary<string,int>>(dataRaw);
+            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, int>>(dataRaw);
             return dictionary;
         }
+
+        public static List<List<string>> ReadBpeFile(string filepath)
+        {
+            var lines = File.ReadAllText(filepath).Split("\n");
+            List<List<string>> bpeMerges = lines
+            .Skip(1)
+            .Take(lines.Count() - 2)
+            .Select(x => x.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(e => e.Trim().Length > 0)
+                .ToList())
+            .ToList();
+
+            return bpeMerges;
+
+        }
+
 
         public string Decode(int[] encodedData)
         {
@@ -66,10 +84,34 @@ namespace Setia.iLLM.Encoder
 
             var cs2 = cs.Select(x => (char)x).ToList();
 
-            Dictionary<int, char> result = bs.Select(( i) => new { b = bs[i], c = cs2[i] })
+            Dictionary<int, char> result = bs.Select((i) => new { b = bs[i], c = cs2[i] })
                 .ToDictionary(pair => pair.b, pair => pair.c);
 
             return result;
+        }
+
+        private List<char[]> GetPairs(char[] word)
+        {
+            var pairs = new List<char[]>();
+            var prev_char = word[0];
+            for (var i = 1; i < word.Length; i++)
+            {
+                var @char = word[i];
+                pairs.Add(new char[] { prev_char, @char });
+                prev_char = @char;
+            }
+            return pairs;
+        }
+
+        private string Bpe(string token)
+        {
+            var word = token.Split("").Select(c=>Convert.ToChar(c)).ToArray();
+            var wordPairs = GetPairs(word);
+            while (true)
+            {
+
+            }
+            return string.Empty;
         }
 
         public int[] Encode(string text)
@@ -80,7 +122,7 @@ namespace Setia.iLLM.Encoder
             foreach (Match regexMatch in regexMatches)
             {
                 byte[] encodedBytes = Encoding.UTF8.GetBytes(regexMatch.Value);
-                var encodedText = string.Join("",encodedBytes.Select(x => encodeByte[x]).ToArray());
+                var encodedText = string.Join("", encodedBytes.Select(x => encodeByte[x]).ToArray());
             }
             throw new NotImplementedException();
             return bpeTokens.ToArray();
