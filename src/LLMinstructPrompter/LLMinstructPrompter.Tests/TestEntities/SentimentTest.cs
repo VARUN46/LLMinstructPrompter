@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LLMinstructPrompter.Tests.TestEntities
+namespace Setia.iLLM.Tests.TestEntities
 {
     public class SentimentTest
     {

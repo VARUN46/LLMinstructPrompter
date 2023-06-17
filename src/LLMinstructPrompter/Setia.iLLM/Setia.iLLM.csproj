@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<PackageId>LLMinstructPrompter</PackageId>
-		<Version>0.0.0.1-alpha</Version>
+		<PackageId>Setia.iLLM</PackageId>
+		<Version>1.0.0.0</Version>
 		<Authors>Varun Setia</Authors>
 		<Company>Varun Setia</Company>
 		<PackageTags>Open AI, Prompt engineering, LLM, Large language models, NLP, Prompts</PackageTags>
@@ -16,31 +16,19 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
-    <AssemblyVersion></AssemblyVersion>
-    <FileVersion></FileVersion>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\LLMinstructPrompter.Abstract\LLMinstructPrompter.Abstract.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="LangFiles\encoder.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Templates\promptTemplates.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 	<ItemGroup>
 		<None Include="docs\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Setia.iLLM.Abstract\Setia.iLLM.Abstract.csproj" />
+	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+	</ItemGroup>
 </Project>
+

@@ -20,6 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\LLMinstructPrompter.Abstract\LLMinstructPrompter.Abstract.csproj" />
     <ProjectReference Include="..\LLMinstructPrompter\LLMinstructPrompter.csproj" />
+    <ProjectReference Include="..\Setia.iLLM.Abstract\Setia.iLLM.Abstract.csproj" />
+    <ProjectReference Include="..\Setia.iLLM\Setia.iLLM.csproj" />
   </ItemGroup>
 
 </Project>

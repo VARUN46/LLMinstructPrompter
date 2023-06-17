@@ -1,8 +1,8 @@
-using LLMinstructPrompter.Abstract.Prompts;
-using LLMinstructPrompter.Prompts;
-using LLMinstructPrompter.Tests.TestEntities;
+using Setia.iLLM.Abstract.Prompts;
+using Setia.iLLM.Prompts;
+using Setia.iLLM.Tests.TestEntities;
 
-namespace LLMinstructPrompter.Tests
+namespace Setia.iLLM.Tests
 {
     public class PromptDesignUnitTest
     {
@@ -82,6 +82,20 @@ namespace LLMinstructPrompter.Tests
             var promptBuilder = promptDesigns.SetTask(new Abstract.Entities.PromptTask { Task = "Write a poem" }).DiscardSystemPrompt();
             var prompt = promptBuilder.GetPrompt();
             Assert.IsNotNull(prompt);
+        }
+
+        [Test] 
+        public void TemplateReplacementTest()
+        {
+            promptDesigns = new PromptDesigns();
+            var promptBuilder = promptDesigns.SetTasks(new Abstract.Entities.PromptTask { Task = "Rephrase the given text as a song: {text}" }, new Abstract.Entities.PromptTask { Task = "Finally, Map each keyword to category accurately and generate output\nCategories:\n{categories}", Order = 2 })
+                                              .ReplaceTemplateWithText(new Abstract.Entities.TemplateTextPair { TemplateVariableName = "{categories}",Value = "Vehicle, Names"}, new Abstract.Entities.TemplateTextPair { TemplateVariableName = "{text}", Value = "Varun must own a hummer so he can have a good ride!!" })
+                                              .SetOutputFormat(Abstract.Entities.OutputType.JSON)
+                                              .OutputObject<List<KeywordCategory>>()
+                                              .SetOutputUniqueness(Abstract.Entities.OutputRandomness.Low);
+            var prompt = promptBuilder.GetPrompt();
+            Assert.IsNotNull(prompt);
+
         }
     }
 }

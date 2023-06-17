@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Setia.iLLM.Tests.TestEntities
 {
-    public class WordCount
+    public class KeywordCategory
     {
-        public string Word { get; set; }
-        public int Count { get; set; }
+        public string Keyword { get; set; }
+        public string Category { get; set; }
     }
 }

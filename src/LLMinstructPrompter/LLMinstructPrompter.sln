@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLMinstructPrompter", "LLMinstructPrompter\LLMinstructPrompter.csproj", "{ED0183A7-14AF-4E0E-BC46-009EC10563F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LLMinstructPrompter", "LLMinstructPrompter\LLMinstructPrompter.csproj", "{ED0183A7-14AF-4E0E-BC46-009EC10563F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLMinstructPrompter.Tests", "LLMinstructPrompter.Tests\LLMinstructPrompter.Tests.csproj", "{D9FF78EE-011D-469F-82AF-5133CD9D256F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LLMinstructPrompter.Tests", "LLMinstructPrompter.Tests\LLMinstructPrompter.Tests.csproj", "{D9FF78EE-011D-469F-82AF-5133CD9D256F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLMinstructPrompter.Abstract", "LLMinstructPrompter.Abstract\LLMinstructPrompter.Abstract.csproj", "{5D36C0B4-D443-4147-A7EA-E40F9068D626}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LLMinstructPrompter.Abstract", "LLMinstructPrompter.Abstract\LLMinstructPrompter.Abstract.csproj", "{5D36C0B4-D443-4147-A7EA-E40F9068D626}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Setia.iLLM", "Setia.iLLM\Setia.iLLM.csproj", "{71CC0BA1-A959-4FCA-B8A0-61D1E2420606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Setia.iLLM.Abstract", "Setia.iLLM.Abstract\Setia.iLLM.Abstract.csproj", "{080EC9DD-84E1-48EA-9E6A-F5FB22792480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{5D36C0B4-D443-4147-A7EA-E40F9068D626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D36C0B4-D443-4147-A7EA-E40F9068D626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D36C0B4-D443-4147-A7EA-E40F9068D626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71CC0BA1-A959-4FCA-B8A0-61D1E2420606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71CC0BA1-A959-4FCA-B8A0-61D1E2420606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71CC0BA1-A959-4FCA-B8A0-61D1E2420606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71CC0BA1-A959-4FCA-B8A0-61D1E2420606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{080EC9DD-84E1-48EA-9E6A-F5FB22792480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080EC9DD-84E1-48EA-9E6A-F5FB22792480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080EC9DD-84E1-48EA-9E6A-F5FB22792480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080EC9DD-84E1-48EA-9E6A-F5FB22792480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
